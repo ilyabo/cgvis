@@ -1,0 +1,1 @@
+@start javaw -Xmx256M  -Dsun.java2d.opengl=true -cp "./CGVis.jar;./extra/mysql-connector-java-3.1.12-bin.jar" at.fhj.cgvis.CGVis

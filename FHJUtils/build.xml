@@ -1,0 +1,70 @@
+<project name="FHJUtils" basedir="." default="build">
+
+	<property name="path.src" value="src"/>
+	<property name="path.test.src" value="test"/>
+	<property name="path.bin" value="bin"/>
+	<property name="path.build" value="build"/>
+	<property name="path.lib" value="lib"/>
+	<property name="jarname" value="fhj-utils"/>
+
+	<target name="build" depends="mkdirs, compile, test, makejar, makejar-core" />
+
+    <path id="master-classpath">
+        <fileset dir="${path.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${path.bin}"/>
+    </path>
+
+	<target name="mkdirs">
+		<mkdir dir="${path.bin}"/>
+		<mkdir dir="${path.build}"/>
+	</target>
+
+	<target name="compile">
+		<javac destdir="${path.bin}" failonerror="true" debug="true" target="1.5">
+			<src path="${path.src}"/>
+			<src path="${path.test.src}"/>
+            <classpath refid="master-classpath"/>
+		</javac>
+	</target>
+
+	<target name="test">
+	    <java fork="yes" classname="junit.textui.TestRunner" taskname="junit" failonerror="true">
+            <classpath refid="master-classpath"/>
+			<arg value="at.fhj.utils.test.AllTests"/>
+	    </java>
+	</target>
+
+    <target name="clean">
+		<delete includeEmptyDirs="true">
+	   	    <fileset dir="${path.bin}">
+	            <include name="**/*.class"/>
+	   	    </fileset>
+	   	</delete>
+    </target>
+
+	<target name="makejar">
+		<jar basedir="${path.bin}" index="no" jarfile="${path.build}/${jarname}.jar">
+			<include name="**/*.class"/>
+			<exclude name="at/fhj/utils/test/**/*.class"/>
+		</jar>
+	</target>
+
+	<target name="makejar-core" description="Core jar (without UI classes)">
+		<jar basedir="${path.bin}" index="yes" jarfile="${path.build}/${jarname}-core.jar">
+			<include name="**/*.class"/>
+			<exclude name="at/fhj/utils/swing/**/*.class"/>
+			<exclude name="at/fhj/utils/test/**/*.class"/>
+		</jar>
+	</target>
+
+	<!--
+	<target name="install">
+		<copy todir="../CGVis/lib" file="${path.build}/${jarname}.jar" overwrite="true"/>
+		<copy todir="../ProClassify/lib" file="${path.build}/${jarname}.jar" overwrite="true"/>
+		<copy todir="../ProClassifyWeb/war/WEB-INF/lib" file="${path.build}/${jarname}-core.jar" overwrite="true"/>
+	</target>
+	-->
+
+</project>

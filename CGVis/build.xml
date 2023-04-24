@@ -1,0 +1,82 @@
+<project name="cgvis" basedir="." default="build-app">
+
+	<property name="release.number" value="0.1"/>
+	<property name="path.src" value="src"/>
+	<property name="path.tests" value="test"/>
+	<property name="path.classes" value="classes"/>
+	<property name="path.lib" value="lib"/>
+	<property name="path.images" value="images"/>
+	<property name="path.build" value="build/cgvis-${release.number}/"/>
+
+	<target name="build-app" depends="mkdirs, compile, one-big-jar" />
+
+    <path id="master-classpath">
+        <fileset dir="${path.lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${path.classes}"/>
+    </path>
+
+	<target name="mkdirs">
+		<mkdir dir="${path.classes}"/>
+		<mkdir dir="${path.build}"/>
+	</target>
+
+	<target name="compile">
+		<javac destdir="${path.classes}" failonerror="true" debug="true" target="1.5">
+			<src path="${path.src}"/>
+			<src path="${path.tests}"/>
+            <classpath refid="master-classpath"/>
+		</javac>
+	</target>
+
+    <target name="clean">
+		<delete includeEmptyDirs="true">
+	   	    <fileset dir="${path.classes}">
+	            <include name="**/*.class"/>
+	   	    </fileset>
+	   	</delete>
+    </target>
+
+	<target name="one-big-jar">
+		<jar basedir="." jarfile="${path.build}/cgvis.jar">
+			<manifest>
+				<attribute name="Main-Class" value="at.fhjoanneum.cgvis.CGVis" />
+			</manifest>
+			<exclude name="**/*" />
+			<fileset dir="${path.classes}">
+				<include name="**/*.class"/>
+				<include name="**/res/*.*"/>
+			</fileset>
+			<zipgroupfileset dir="${path.lib}">
+				<include name="**/*.jar"/>
+				<exclude name="**/junit-*.jar"/>
+			</zipgroupfileset>
+		</jar>
+		<copy file="ReadMe.txt" todir="${path.build}"/>
+		<copy file="log4j.properties" todir="${path.build}"/>
+		<copy todir="${path.build}">
+			 <fileset dir="." includes="sample-data/cgv/*.*"/>
+			 <fileset dir="." includes="sample-data/csv/*.*"/>
+		</copy>
+		<copy todir="${path.build}">
+			 <fileset dir="shell" includes="*.*"/>
+		</copy>
+		<zip destfile="build/cgvis-${release.number}.zip">
+			<fileset dir="build" includes="cgvis-${release.number}/**/*.*"/>
+		</zip>
+	</target>
+
+   <target name="build-lib" depends="clean, mkdirs, compile">
+        <jar basedir="." jarfile="build/cgvis-lib.jar">
+            <exclude name="**/*" />
+            <fileset dir="${path.classes}">
+                <include name="at/fhjoanneum/cgvis/data/**/*.class"/>
+                <include name="at/fhjoanneum/cgvis/plots/**/*.class"/>
+                <exclude name="**/res/*.*"/>
+            </fileset>
+        </jar>
+   	    <copyfile src="build/cgvis-lib.jar" dest="../JFlowMap/lib/cgvis-lib.jar"/>
+    </target>
+
+</project>

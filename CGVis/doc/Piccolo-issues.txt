@@ -1,0 +1,5 @@
+  - Painting (and probably not only painting) problems with setBounds() and animateToBounds()
+	when trying to set sizes smaller than 1.0
+
+  - All the coordinate system conversion methods viewToLocal, localToView, localToParent etc
+  	modify the rectangle passed in as a parameter

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<cgvisdata version = "1">
+	<set key="auto" name="Data1+Data2">
+		<dbdata type="Oracle">
+			<name>Test</name>
+			<server>localhost</server>
+			<port>1521</port>
+			<database>DATA</database>
+			<username>CGVIS</username>
+			<password>CGVIS</password>
+			<startkey>0</startkey>
+			<alias sourcecol="Tick" targetcol="Donald"/>
+			<selection>SELECT * FROM Test</selection>
+		</dbdata>
+	</set>
+</cgvisdata>

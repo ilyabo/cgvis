@@ -1,0 +1,11 @@
+<cgvisdata version = "1">
+	<set key="auto" name="Data1+Data2" keyColumn="PATIENTID">
+		<dbdata type="ODBC">
+			<database>DATA</database>
+			<username>CGVIS</username>
+			<password>CGVIS</password>
+			<alias sourcecol="TICK" targetcol="Donald"/>
+			<selection>SELECT * FROM Test</selection>
+		</dbdata>
+	</set>
+</cgvisdata>

@@ -1,0 +1,12 @@
+<cgvisdata version = "1">
+	<set key="auto" name="Data1+Data2" keyColumn="PATIENTID">
+		<dbdata type="Raw">
+			<class>oracle.jdbc.driver.OracleDriver</class>
+			<url>jdbc:oracle:thin:@localhost:1521:DATA</url>
+			<username>CGVIS</username>
+			<password>CGVIS</password>
+			<alias sourcecol="Tick" targetcol="Donald"/>
+			<selection>SELECT * FROM Test</selection>
+		</dbdata>
+	</set>
+</cgvisdata>

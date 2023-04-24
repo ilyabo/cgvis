@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!-- Server defaults to 'localhost', Port defaults to '3306' -->
+
+<!--
+CREATE TABLE test (
+       id INT NOT NULL
+     , c1 DOUBLE
+     , c2 DOUBLE
+     , c3 DOUBLE
+     , PRIMARY KEY (id)
+);
+
+INSERT INTO test (id, c1, c2, c3) VALUES (1, 2.33, 3.22, 105.7);
+INSERT INTO test (id, c1, c2, c3) VALUES (2, 12.1, 1.35, 3.7);
+INSERT INTO test (id, c1, c2, c3) VALUES (3, 111.33, 2.22, 3.7);
+INSERT INTO test (id, c1, c2, c3) VALUES (4, 22.1, 13.2, 10.3);
+INSERT INTO test (id, c1, c2, c3) VALUES (5, 2.1, 32.1, 1.2);
+INSERT INTO test (id, c1, c2, c3) VALUES (6, 3.0, 23.17, 14.2);
+INSERT INTO test (id, c1, c2, c3) VALUES (7, 1.22, 23.1, 71.2);
+INSERT INTO test (id, c1, c2, c3) VALUES (8, 7.13, 23.1, 11.2);
+INSERT INTO test (id, c1, c2, c3) VALUES (9, 4.1, 2.21, 1.25);
+INSERT INTO test (id, c1, c2, c3) VALUES (10, 22.12, 62.1, 16.2);
+
+GRANT ALL PRIVILEGES ON cgvis.* TO 'cgvis'@'localhost' IDENTIFIED BY 'cgvis';
+-->
+
+<cgvisdata version = "1">
+	<set key="auto" name="Data1+Data2" rowLabelColumn="id">
+		<dbdata type="mysql">
+			<database>cgvis</database>
+			<username>cgvis</username>
+			<password>cgvis</password>
+			<alias sourcecol="c1" targetcol="lalala"/>
+			<selection>SELECT * FROM test</selection>
+		</dbdata>
+	</set>
+</cgvisdata>

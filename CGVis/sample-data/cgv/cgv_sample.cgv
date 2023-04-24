@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<cgvisdata version = "1">
+	<set key="auto" name="Data1+Data2">
+		<normalize column="COL1" mode="RANGE"/>
+		<csvdata>
+			<startkey>2</startkey>
+			<path>Data1.csv</path>
+			<separator>;</separator>
+			<decimalseparator>.</decimalseparator>
+			<nan symbol="NaN" />
+		</csvdata>
+		<csvdata>
+			<startkey>2</startkey>
+			<path>Data2.csv</path>
+			<separator>;</separator>
+			<decimalseparator>.</decimalseparator>
+			<nan symbol="NaN" />
+		</csvdata>
+	</set>
+</cgvisdata>
